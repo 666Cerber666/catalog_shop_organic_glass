@@ -1,5 +1,11 @@
 <script>
-export default{}
+export default{
+    methods: {
+        goToProducts() {
+            this.$router.push({ name: 'items' });
+        }
+    },
+}
 </script>
 
 <template>
@@ -9,7 +15,7 @@ export default{}
         <h2>Органического</h2>
         <h3>Стекла!</h3>
         <p>Органическое стекло оптом и в розницу!</p>
-        <button>Что мы предлагаем?</button>
+        <button @click="goToProducts()">Что мы предлагаем?</button>
     </aside>
     <img src="../../public/img/photocommercy.png">
 </div>
