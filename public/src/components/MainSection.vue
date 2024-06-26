@@ -17,7 +17,7 @@ export default{
         <p>Органическое стекло оптом и в розницу!</p>
         <button @click="goToProducts()">Что мы предлагаем?</button>
     </aside>
-    <img src="../../public/img/photocommercy.png">
+    <img src="../../public/img/photocommercy.png" class="image">
 </div>
 </template>
 
@@ -70,4 +70,21 @@ export default{
 .wrapper aside button:hover{
     transform: translateY(-5px);
 }
+
+@keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        aside {
+            animation: 1s ease-out 0s 1 slideInFromLeft;
+            padding: 20px;
+        }
+
 </style>

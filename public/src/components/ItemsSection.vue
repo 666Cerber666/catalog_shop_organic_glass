@@ -90,27 +90,14 @@ export default{
             </transition-group>
         </div>
         <div class="wrapper_items">
-        <div class="category-selector">
-            <div class="category">
-                <div class="ico"><i class="fa-regular fa-file-lines"></i></div>
-                Оргстекло прозрачное</div>
-            <div class="category">
-                <div class="ico"><i class="fa-regular fa-file"></i></div>
-                Оргстекло молочное белое</div>
-            <div class="category">
-                <div class="ico"><i class="fa-regular fa-file-excel"></i></div>
-                Оргстекло цветное</div>
-            <div class="category">
-                <div class="ico"></div>
-                Специального назначения</div>
-        </div>
+
         <div class="sorters">
             <SortersSection/>
         </div>
 
         <div class="items">
         <div class="item" v-for="el in filteredItems" :key="el.slug" @click="goToProduct(el.slug)">
-            <img :src="'/img/' + el.image" :alt="el.title" class="photos">
+            <img :src="'/img/' + el.image" :alt="el.title" class="photos image">
             <h3>{{ el.title }}</h3>
             <p>{{ el.desc }}</p>
             <div class="bottom">

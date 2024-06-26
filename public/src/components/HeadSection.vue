@@ -4,12 +4,12 @@ export default{}
 
 <template>
 <div class="wrapper">
-    <div>
+    <div class="topside">
         <h1>Магазин Органического Стекла</h1>
         <h2>Выбирай лучших!</h2>
     </div>
     <div>
-        <img src="/img/photocommercy.png" alt="main">
+        <img src="/img/photocommercy.png" alt="main" class="image">
     </div>
 </div>
 </template>
@@ -45,6 +45,21 @@ export default{}
     position: relative;
     top: 8px;
     right: 30px;
+}
+
+@keyframes slideInFromBottom {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+.topside{
+    animation: 1s ease-out 0s 1 slideInFromBottom;
 }
 
 </style>
