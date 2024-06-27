@@ -118,7 +118,7 @@ export default {
         <div class="items" :class="viewMode">
           <div
             v-if="viewMode === 'grid'"
-            class="item-grid"
+            class="item"
             v-for="el in filteredItems"
             :key="el.slug"
             @click="goToProduct(el.slug)"
@@ -234,11 +234,6 @@ export default {
     background: #b6d7db;
 }
 
-.ico {
-    width: 50px;
-    height: 100%;
-}
-
 .items {
     display: flex;
     align-items: center;
@@ -247,7 +242,7 @@ export default {
     gap: 25px;
 }
 
-.items.grid .item-grid:hover {
+.items .item:hover {
     transform: scale(1.05);
 }
 
@@ -266,21 +261,16 @@ export default {
     width: 90%;
 }
 
+.item {
+  cursor: pointer;
+  transition: all 600ms ease;
+}
+
 .items .item .bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-}
-
-.items .item .bottom span {
-    color: #216e5b;
-    font-weight: 700;
-}
-
-.items.grid .item-grid .bottom img {
-    cursor: pointer;
-    transition: all 600ms ease;
 }
 
 .items .item .bottom img:hover {
@@ -318,10 +308,10 @@ i {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color 0.3s ease;
 }
 
 .accordion-slot:hover {
-    height: 50px;
     background: #e0f7fa;
     cursor: pointer;
 }
@@ -335,19 +325,6 @@ i {
 .v-leave-to {
     transform: translateY(30px);
     opacity: 0;
-}
-
-.accordion-slot:nth-child(odd) {
-    background-color: #f9f9f9;
-}
-
-.accordion-slot:nth-child(even) {
-    background-color: #e9e9e9;
-}
-
-.accordion-slot:nth-child(even):hover,
-.accordion-slot:nth-child(odd):hover {
-    background: #e0f7fa;
 }
 
 .view-toggle-icons {
