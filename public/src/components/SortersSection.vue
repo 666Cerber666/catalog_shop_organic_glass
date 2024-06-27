@@ -15,18 +15,108 @@
           key="body"
         >
           <div
+            v-if="accordion.title === 'Цена'"
             class="accordion-slot"
-            v-for="category in categories"
-            :key="category"
-            @click="openEditor(category)"
+            @click="openEditor(accordion.category)"
           >
-            {{ category }}
+            <!-- Контент для аккордеона "Цена" -->
+            {{ accordion.category }}
+            <div class="price-filter">
+              <div class="wrap-input-price">
+                <input v-model.number="minPrice" type="number" :min="0" :max="maxPrice" @input="updateRange">
+                <input v-model.number="maxPrice" type="number" :min="minPrice" :max="maxAllowedPrice" @input="updateRange">
+              </div>
+              <div class="range-input">
+                <input v-model.number="minPrice" type="range" :min="0" :max="maxAllowedPrice" @input="updateNumberInputs">
+                <input v-model.number="maxPrice" type="range" :min="0" :max="maxAllowedPrice" @input="updateNumberInputs">
+              </div>
+              <div class="price-display">
+                <span>От: {{ minPrice }}</span>
+                <span>До: {{ maxPrice }}</span>
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="accordion.title === 'Бренд'"
+            class="accordion-slot"
+            @click="openEditor(accordion.category)"
+          >
+            <!-- Контент для аккордеона "Бренд" -->
+            {{ accordion.category }}
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+          </div>
+          <div
+            v-if="accordion.title === 'Цвет'"
+            class="accordion-slot"
+            @click="openEditor(accordion.category)"
+          >
+            <!-- Контент для аккордеона "Цвет" -->
+            {{ accordion.category }}
+            <div><select><option>Все</option><option>Прозрачный</option></select></div>
+          </div>
+          <div
+            v-if="accordion.title === 'Размер'"
+            class="accordion-slot"
+            @click="openEditor(accordion.category)"
+          >
+            <!-- Контент для аккордеона "Размер" -->
+            {{ accordion.category }}
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+          </div>
+          <div
+            v-if="accordion.title === 'Толщина'"
+            class="accordion-slot"
+            @click="openEditor(accordion.category)"
+          >
+            <!-- Контент для аккордеона "Толщина" -->
+            {{ accordion.category }}
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+          </div>
+          <div
+            v-if="accordion.title === 'Плотность'"
+            class="accordion-slot"
+            @click="openEditor(accordion.category)"
+          >
+            <!-- Контент для аккордеона "Плотность" -->
+            {{ accordion.category }}
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+          </div>
+          <div
+            v-if="accordion.title === 'Тип поверхности'"
+            class="accordion-slot"
+            @click="openEditor(accordion.category)"
+          >
+            <!-- Контент для аккордеона "Тип поверхности" -->
+            {{ accordion.category }}
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+          </div>
+          <div
+            v-if="accordion.title === 'Толщина листа'"
+            class="accordion-slot"
+            @click="openEditor(accordion.category)"
+          >
+            <!-- Контент для аккордеона "Толщина листа" -->
+            {{ accordion.category }}
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
+            <div><input type="checkbox"> <label>Bam-bam</label></div>
           </div>
         </div>
       </transition-group>
     </div>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -36,6 +126,9 @@ export default {
       selectedCategory: 'Все',
       isEditorOpen: false,
       currentCategory: 'Все',
+      minPrice: 0,
+      maxPrice: 1000,
+      maxAllowedPrice: 1000,
       accordions: [
         { title: 'Цена', category: 'Цена', isOpen: false },
         { title: 'Бренд', category: 'Бренд', isOpen: false },
@@ -50,8 +143,23 @@ export default {
   },
   methods: {
     toggle(title) {
-      const accordion = this.accordions.find(a => a.title === title);
-      accordion.isOpen = !accordion.isOpen;
+      this.accordions.forEach((accordion) => {
+        if (accordion.title === title) {
+          accordion.isOpen = !accordion.isOpen;
+        } else {
+          accordion.isOpen = false;
+        }
+      });
+    },
+    updateRange() {
+      if (this.minPrice > this.maxPrice) {
+        this.minPrice = this.maxPrice;
+      }
+    },
+    updateNumberInputs() {
+      if (this.minPrice > this.maxPrice) {
+        this.minPrice = this.maxPrice;
+      }
     },
     openEditor(category) {
       this.currentCategory = category;
@@ -88,12 +196,13 @@ export default {
 .accordion-body {
   border: 1px solid #ddd;
   border-radius: 4px;
-  position:absolute;
-  z-index:1;
+  position: absolute;
+  z-index: 1;
 }
 .accordion-slot {
-  height: 50px;
+  padding:5px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -149,5 +258,30 @@ export default {
 }
 .modal-enter, .modal-leave-to {
   opacity: 0;
+}
+
+.wrap-input-price {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.wrap-input-price input {
+  width: 48%;
+}
+
+.range-input {
+  display: flex;
+  justify-content: space-between;
+}
+
+.range-input input {
+  width: 48%;
+}
+
+.price-display {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 </style>
