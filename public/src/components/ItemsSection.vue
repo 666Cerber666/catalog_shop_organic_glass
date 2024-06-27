@@ -103,17 +103,17 @@ export default {
         </div>
   
         <div class="view-toggle-icons">
-        <i
-          class="fas fa-th"
-          @click="viewMode = 'grid'"
-          :class="{ active: viewMode === 'grid' }"
-        ></i>
-        <i
-          class="fas fa-list"
-          @click="viewMode = 'list'"
-          :class="{ active: viewMode === 'list' }"
-        ></i>
-      </div>
+          <i
+            class="fas fa-th"
+            @click="viewMode = 'grid'"
+            :class="{ active: viewMode === 'grid' }"
+          ></i>
+          <i
+            class="fas fa-list"
+            @click="viewMode = 'list'"
+            :class="{ active: viewMode === 'list' }"
+          ></i>
+        </div>
   
         <div class="items" :class="viewMode">
           <div
@@ -132,7 +132,7 @@ export default {
                 src="/img/kosz.png"
                 class="add_busket"
                 :alt="el.title"
-                @click="addToBasket(el)"
+                @click.stop="addToBasket(el)"
               />
             </div>
           </div>
@@ -164,7 +164,7 @@ export default {
                     src="/img/kosz.png"
                     class="add_busket"
                     :alt="el.title"
-                    @click="addToBasket(el)"
+                    @click.stop="addToBasket(el)"
                   />
                 </td>
               </tr>
@@ -175,31 +175,34 @@ export default {
     </div>
   </template>
   
+  
 
-<style scoped>
-.wrapper{
-    display:flex;
-    gap:15px;
+  <style scoped>
+.wrapper {
+    display: flex;
+    gap: 15px;
 }
 
-.wrapper_items{
-    width:100%;
+.wrapper_items {
+    width: 100%;
 }
 
-.sorters{
-    display:flex;
-    gap:5px;
+.sorters {
+    display: flex;
+    gap: 5px;
 }
 
 .category-selector {
     margin-bottom: 20px;
-    background-color: #e0f7fa; /* Голубой цвет фона */
+    background-color: #e0f7fa;
     border-radius: 10px;
     text-align: center;
-    font-size: 18px; /* Увеличение размера текста */
-    display:flex;
-    height:60px;
-    cursor:pointer;
+    font-size: 18px;
+    display: flex;
+    height: 60px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
 }
 
 .category-selector label {
@@ -209,40 +212,42 @@ export default {
 
 .category-selector select {
     padding: 10px;
-    font-size: 16px; /* Увеличение размера текста в селекторе */
+    font-size: 16px;
     border: none;
     border-radius: 5px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.category{
-    border:1px solid gray;
-    width:100%;
-    height:80%;
-    padding:10px 0px 0px 0px;
+.category {
+    border: 1px solid gray;
+    width: 100%;
+    height: 80%;
+    padding: 10px 0;
     text-align: center;
-    display:flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.category:hover{
+.category:hover {
     background: #b6d7db;
 }
 
-.ico{
-    width:50px;
-    height:100%;
+.ico {
+    width: 50px;
+    height: 100%;
 }
 
 .items {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    margin-top:10px;
-    gap:25px;
+    margin-top: 10px;
+    gap: 25px;
 }
 
-.items .item:hover {
+.items.grid .item-grid:hover {
     transform: scale(1.05);
 }
 
@@ -273,7 +278,7 @@ export default {
     font-weight: 700;
 }
 
-.items .item .bottom img {
+.items.grid .item-grid .bottom img {
     cursor: pointer;
     transition: all 600ms ease;
 }
@@ -282,44 +287,48 @@ export default {
     transform: scale(1.2);
 }
 
-.add_busket{
-    width:25px;
-    height:25px;
+.add_busket {
+    width: 25px;
+    height: 25px;
 }
 
-i{
-    width:100%;
-    height:100%;
+i {
+    width: 100%;
+    height: 100%;
 }
 
 .accordion-header {
-  background: #f7f7f7;
-  padding:0px 10px;
-  height:60px;
-  cursor: pointer;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  display:flex;
-  align-items: center;
+    background: #f7f7f7;
+    padding: 0px 10px;
+    height: 60px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
 }
+
 .accordion-body {
-  border: 1px solid #ddd;
-  border-radius: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
-.accordion-slot{
-    height:50px;
+
+.accordion-slot {
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.accordion-slot:hover{
-    height:50px;
+
+.accordion-slot:hover {
+    height: 50px;
     background: #e0f7fa;
-    cursor:pointer;
+    cursor: pointer;
 }
+
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .v-enter-from,
@@ -329,40 +338,43 @@ i{
 }
 
 .accordion-slot:nth-child(odd) {
-  background-color: #f9f9f9;
+    background-color: #f9f9f9;
 }
+
 .accordion-slot:nth-child(even) {
-  background-color: #e9e9e9;
+    background-color: #e9e9e9;
 }
-.accordion-slot:nth-child(even):hover {
-    background: #e0f7fa;
-}
+
+.accordion-slot:nth-child(even):hover,
 .accordion-slot:nth-child(odd):hover {
     background: #e0f7fa;
 }
 
 .view-toggle-icons {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
 }
+
 .view-toggle-icons i {
-  cursor: pointer;
-  width:50px;
-  font-size: 24px;
-  margin: 0 10px;
+    cursor: pointer;
+    width: 50px;
+    font-size: 24px;
+    margin: 0 10px;
 }
+
 .view-toggle-icons .active {
-  color: #007bff;
+    color: #007bff;
 }
 
 .items.list .item-table {
-  width: 100%;
-  border-collapse: collapse;
+    width: 70%;
+    border-collapse: collapse;
 }
+
 .items.list .item-table th,
 .items.list .item-table td {
-  padding: 10px;
-  border: 1px solid #ddd;
+    padding: 10px;
+    border: 1px solid #ddd;
 }
 </style>
